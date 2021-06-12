@@ -18,6 +18,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 /// Singleton API for managing Network Service Discovery
@@ -32,7 +33,7 @@ class FlutterNsd {
   static final FlutterNsd _instance = FlutterNsd._internal();
 
   final _streamController = StreamController<NsdServiceInfo>();
-  late Stream<NsdServiceInfo> _stream;
+  Stream<NsdServiceInfo> _stream;
 
   /// Factory for getting [FlutterNsd] singleton object
   factory FlutterNsd() {
@@ -96,10 +97,10 @@ class FlutterNsd {
 
 /// Info class for holding discovered service
 class NsdServiceInfo {
-  final String? hostname;
-  final int? port;
-  final String? name;
-  final Map<String, Uint8List>? txt;
+  final String hostname;
+  final int port;
+  final String name;
+  final Map<String, Uint8List> txt;
 
   NsdServiceInfo(this.hostname, this.port, this.name, this.txt);
 }
@@ -117,5 +118,5 @@ class NsdError extends Error {
   /// The cause of this [NsdError].
   final NsdErrorCode errorCode;
 
-  NsdError({required this.errorCode});
+  NsdError({@required this.errorCode});
 }
